@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import { Context } from '../../context/authContext'
-import { toast } from 'react-toastify'
-import { ToastContainer } from 'react-toastify';
-// import axios from "axios"
 import "./Login.css"
 
 const Login = () => {
@@ -12,29 +9,6 @@ const Login = () => {
 
     const login = (e) => {
         e.preventDefault()
-
-        // axios.post("http://localhost:8000/auth/login",
-
-        //     {
-        //         email,
-        //         password
-        //     }
-        //     ,
-        //     {
-        //         headers: {
-        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }
-
-        // )
-        //     .then((res) => {
-        //         console.log(res)
-        //         setAuth(true)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
 
         const requestOptions = {
             method: 'POST',
