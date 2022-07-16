@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useToken from '../../hook/useToken'
-import axios from "axios"
+// import axios from "axios"
 import "./Register.css"
 
 const Register = () => {
@@ -11,17 +11,40 @@ const Register = () => {
     const register = (e) => {
         e.preventDefault()
 
-        axios.post("http://localhost:8000/auth/register",
-            {
+        // axios.post("http://localhost:8000/auth/register",
+
+        //     {
+        //         email: email,
+        //         password: password
+        //     },
+
+        // )
+        //     .then((res) => {
+        //         console.log(res.data.access_token)
+        //         setToken(res.data.access_token)
+        //     })
+        //     .catch((err) => console.log(err))
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
                 email: email,
                 password: password
-            },
-        )
-            .then((res) => {
-                console.log(res.data.access_token)
-                setToken(res.data.access_token)
             })
-            .catch((err) => console.log(err))
+        };
+        fetch('http://localhost:8000/auth/register', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setToken(data.access_token)
+            })
+            .catch(err => console.log(err));
+
+        setEmail(" ")
+        setPassword(" ")
     }
 
     return (

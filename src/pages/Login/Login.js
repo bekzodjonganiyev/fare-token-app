@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Context } from '../../context/authContext'
-import axios from "axios"
+// import axios from "axios"
 import "./Login.css"
 
 const Login = () => {
@@ -11,28 +11,50 @@ const Login = () => {
     const login = (e) => {
         e.preventDefault()
 
-        axios.post("http://localhost:8000/auth/login",
-            {
+        // axios.post("http://localhost:8000/auth/login",
+
+        //     {
+        //         email,
+        //         password
+        //     }
+        //     ,
+        //     {
+        //         headers: {
+        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //             'Content-Type': 'application/json'
+        //         }
+        //     }
+
+        // )
+        //     .then((res) => {
+        //         console.log(res)
+        //         setAuth(true)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            }
+            ,
+            body: JSON.stringify({
                 email: email,
                 password: password
-            },
-            // {
-            //     headers: {
-            //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            //         'Content-Type': 'application/json'
-            //     }
-            // }
-
-        )
-            .then((res) => {
-                console.log(res)
+            })
+        };
+        fetch('http://localhost:8000/auth/login', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
                 setAuth(true)
             })
-            .catch((err) => {
-                console.log(err)
-            })
+            .catch(err => console.log("salom", err));
     }
-    console.log(email, password)
+
     return (
         <form className='form-with shadow-lg p-3 mb-5 bg-body rounded' onSubmit={login}>
             <h3 className='text-center'>Login</h3>
@@ -43,7 +65,7 @@ const Login = () => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    value={email}
+                    // value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
@@ -53,7 +75,7 @@ const Login = () => {
                     type="password"
                     className="form-control"
                     id="exampleInputPassword1"
-                    value={password}
+                    // value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
