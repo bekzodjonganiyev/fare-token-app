@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import useToken from '../../hook/useToken'
 import {useNavigate} from "react-router-dom"
 import "./Register.css"
-// import axios from "axios"
 
 const Register = () => {
     const [setToken] = useToken(true)
@@ -12,20 +11,6 @@ const Register = () => {
     const navigate = useNavigate()
     const register = (e) => {
         e.preventDefault()
-
-        // axios.post("http://localhost:8000/auth/register",
-
-        //     {
-        //         email: email,
-        //         password: password
-        //     },
-
-        // )
-        //     .then((res) => {
-        //         console.log(res.data.access_token)
-        //         setToken(res.data.access_token)
-        //     })
-        //     .catch((err) => console.log(err))
 
         const requestOptions = {
             method: 'POST',
@@ -40,7 +25,6 @@ const Register = () => {
         fetch('http://localhost:8000/auth/register', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setToken(data.access_token)
                 setEmail("")
                 setPassword("")
