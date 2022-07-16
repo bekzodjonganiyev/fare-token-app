@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import useToken from '../../hook/useToken'
-// import axios from "axios"
+import {useNavigate} from "react-router-dom"
 import "./Register.css"
+// import axios from "axios"
 
 const Register = () => {
     const [setToken] = useToken(true)
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+    const navigate = useNavigate()
     const register = (e) => {
         e.preventDefault()
 
@@ -40,15 +42,18 @@ const Register = () => {
             .then(data => {
                 console.log(data)
                 setToken(data.access_token)
+                setEmail("")
+                setPassword("")
+                navigate("/")
             })
             .catch(err => console.log(err));
-
-        setEmail(" ")
-        setPassword(" ")
     }
 
     return (
-        <form className='form-with shadow-lg p-3 mb-5 bg-body rounded' onSubmit={register}>
+        <form className='form-with shadow-lg p-3 mb-5 bg-body rounded'
+            onSubmit={
+                register
+            }>
             <h3 className='text-center'>Register</h3>
             <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
@@ -57,6 +62,9 @@ const Register = () => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    autoComplete='off'
+                    required
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
@@ -66,10 +74,16 @@ const Register = () => {
                     type="password"
                     className="form-control"
                     id="exampleInputPassword1"
+                    required
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <button type="submit" className="btn btn-primary">Register</button>
+            <button type="submit" className="btn btn-primary"
+                onClick={() => {
+
+                }}
+            >Register</button>
         </form>
     )
 }
