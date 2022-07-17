@@ -26,11 +26,18 @@ const Login = () => {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 401) {
-                   alert(data.message)
+                    alert(data.message)
+                    setEmail("")
+                    setPassword("")
+                    console.log(data)
                 }
-                setEmail("")
-                setPassword("")
-                // setAuth(true)
+                else {
+                    setEmail("")
+                    setPassword("")
+                    setAuth(true)
+                    console.log(data)
+                }
+
             })
             .catch(err => console.log("salom", err));
     }
