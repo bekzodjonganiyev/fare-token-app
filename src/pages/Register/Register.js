@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import useToken from '../../hook/useToken'
 import {useNavigate} from "react-router-dom"
 import "./Register.css"
 
 const Register = () => {
-    const [setToken] = useToken(true)
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
@@ -25,7 +23,6 @@ const Register = () => {
         fetch('http://localhost:8000/auth/register', requestOptions)
             .then(response => response.json())
             .then(data => {
-                setToken(data.access_token)
                 setEmail("")
                 setPassword("")
                 navigate("/")
