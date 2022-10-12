@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Context } from '../../context/authContext'
+import useToken from '../../hook/useToken'
 import "./Login.css"
 
 const Login = () => {
-    const { setAuth } = React.useContext(Context)
+    const [setToken] = useToken(true)
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
@@ -34,7 +34,7 @@ const Login = () => {
                 else {
                     setEmail("")
                     setPassword("")
-                    setAuth(true)
+                    setToken(data.access_token)
                     console.log(data)
                 }
 
